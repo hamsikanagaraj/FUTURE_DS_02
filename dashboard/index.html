@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SaaS Customer Retention & Churn Intelligence Dashboard. Cohort retention tracking, machine learning churn drivers, and revenue protection analytics.">
+  <title>RetainPulse | SaaS Customer Retention & Churn Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-theme="pearl" data-font="sora-inter">
+
+  <!-- Ambient Animated Background Glow Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+    <div class="cyber-grid"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h2>RetainPulse</h2>
+          <span class="brand-tag">Retention Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#overview-section" class="nav-item active" id="nav-overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+          Executive Overview
+        </a>
+        <a href="#cohorts-section" class="nav-item" id="nav-cohorts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Cohort Heatmap Matrix
+        </a>
+        <a href="#drivers-section" class="nav-item" id="nav-drivers">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          Churn Drivers & ML
+        </a>
+        <a href="#simulator-section" class="nav-item" id="nav-simulator">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+          ROI & Churn Simulator
+        </a>
+        <a href="#accounts-section" class="nav-item" id="nav-accounts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          At-Risk Accounts
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="dataset-badge">
+          <span class="pulse-dot"></span>
+          <span>8,500 Accounts Active</span>
+        </div>
+        <p class="analysis-period">Horizon: FY2024 – FY2026</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header / Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <div class="header-left-title-row">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="status-live-chip">
+              <span class="live-dot"></span>
+              <span>Live Retention Telemetry</span>
+            </div>
+          </div>
+          <h1 class="page-title">Customer Retention & Churn Intelligence</h1>
+          <p class="page-subtitle">Longitudinal Cohort Tracking, ML Driver Decomposition & Strategic Revenue Protection</p>
+        </div>
+
+        <div class="header-actions">
+          <!-- Theme Switcher Option -->
+          <div class="filter-group theme-selector-group">
+            <label for="theme-selector">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+              Theme:
+            </label>
+            <select id="theme-selector" class="custom-select theme-select">
+              <option value="pearl" selected>💎 Frosted Pearl & Sapphire (Light)</option>
+              <option value="navy">🌌 Royal Cobalt & Navy (Deep Blue)</option>
+              <option value="emerald">🌿 Alpine Sage & Mint (Light)</option>
+              <option value="sunset">🌅 Warm Sunset & Rose (Light)</option>
+            </select>
+          </div>
+
+          <!-- Font Style Switcher Option -->
+          <div class="filter-group font-selector-group">
+            <label for="font-selector">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+              Font:
+            </label>
+            <select id="font-selector" class="custom-select font-select">
+              <option value="sora-inter" selected>Sora + Inter (Modern Tech)</option>
+              <option value="space-dmsans">Space Grotesk + DM Sans</option>
+              <option value="outfit-jakarta">Outfit + Plus Jakarta</option>
+              <option value="mono-tech">JetBrains Mono (Data Terminal)</option>
+            </select>
+          </div>
+
+          <!-- Segment Filter Option -->
+          <div class="filter-group">
+            <label for="segment-filter">Segment:</label>
+            <select id="segment-filter" class="custom-select">
+              <option value="ALL">All Segments</option>
+              <option value="SMB">SMB</option>
+              <option value="Mid-Market">Mid-Market</option>
+              <option value="Enterprise">Enterprise</option>
+            </select>
+          </div>
+
+          <!-- Plan Filter Option -->
+          <div class="filter-group">
+            <label for="plan-filter">Plan:</label>
+            <select id="plan-filter" class="custom-select">
+              <option value="ALL">All Plans</option>
+              <option value="Starter">Starter ($49)</option>
+              <option value="Professional">Professional ($149)</option>
+              <option value="Enterprise">Enterprise ($499)</option>
+            </select>
+          </div>
+
+          <!-- Billing Cycle Option -->
+          <div class="filter-group">
+            <label for="billing-filter">Contract:</label>
+            <select id="billing-filter" class="custom-select">
+              <option value="ALL">All Billing</option>
+              <option value="Monthly">Monthly Only</option>
+              <option value="Annual">Annual Only</option>
+            </select>
+          </div>
+
+          <!-- Reset Filter Button (Active when filters applied) -->
+          <button id="reset-global-filters-btn" class="btn btn-secondary btn-reset-filters" title="Reset all global filters" style="display: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>Reset</span>
+          </button>
+
+          <!-- Action Buttons -->
+          <div class="action-btn-group">
+            <button id="export-csv-btn" class="btn btn-secondary" title="Export Filtered Accounts to CSV">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>CSV</span>
+            </button>
+            <a href="../reports/Executive_Retention_Churn_Report.html" target="_blank" class="btn btn-secondary" title="Open Full Executive Strategic Report" id="view-exec-report-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Report HTML</span>
+            </a>
+            <button id="export-report-btn" class="btn btn-primary" title="Print Executive Presentation">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>Print / PDF</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Section: Executive Overview & Bento KPI Grid -->
+      <section id="overview-section" class="dashboard-section">
+        <div class="bento-kpi-grid">
+          <!-- Bento KPI 1: Churn Rate (Hero Highlight) -->
+          <div class="kpi-card bento-hero" id="kpi-card-churn">
+            <div class="kpi-header">
+              <div class="kpi-badge-wrap">
+                <span class="kpi-title">Overall Customer Churn Rate</span>
+                <span class="kpi-sub-badge">Benchmark: &lt;25%</span>
+              </div>
+              <div class="kpi-icon rose">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m23 18-9.5-9.5-5 5L1 6"/><path d="M17 18h6v-6"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value-row">
+              <span class="kpi-value hero-val" id="kpi-churn-rate">42.3%</span>
+              <div class="kpi-mini-trend">
+                <span class="trend-tag danger">▲ +17.3% vs Target</span>
+                <span class="trend-detail">3,597 churned accounts</span>
+              </div>
+            </div>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-progress-bar">
+                <div class="progress-fill rose-fill" style="width: 42.3%;"></div>
+              </div>
+              <div class="kpi-bar-labels">
+                <span>Healthy Zone (&lt;25%)</span>
+                <span>Current: 42.3%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento KPI 2: Gross Revenue Retention (GRR) & NRR -->
+          <div class="kpi-card" id="kpi-card-grr">
+            <div class="kpi-header">
+              <span class="kpi-title">Revenue Retention (GRR / NRR)</span>
+              <div class="kpi-icon cyan">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value-row">
+              <span class="kpi-value" id="kpi-grr">73.5%</span>
+              <span class="kpi-pill-badge badge-info">NRR: 104.2%</span>
+            </div>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-progress-bar">
+                <div class="progress-fill cyan-fill" style="width: 73.5%;"></div>
+              </div>
+              <div class="kpi-bar-labels">
+                <span>Target: &gt;85% GRR</span>
+                <span>Net Expansion: +4.2%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento KPI 3: Active MRR -->
+          <div class="kpi-card" id="kpi-card-mrr">
+            <div class="kpi-header">
+              <span class="kpi-title">Active Recurring MRR</span>
+              <div class="kpi-icon emerald">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value-row">
+              <span class="kpi-value" id="kpi-active-mrr">$1,749,276</span>
+              <span class="kpi-pill-badge badge-success">ARR: $20.99M</span>
+            </div>
+            <div class="kpi-footer-metric">
+              <span class="muted-text">Monthly Churn Erosion:</span>
+              <span class="loss-text">-$630,741 / mo</span>
+            </div>
+          </div>
+
+          <!-- Bento KPI 4: Customer LTV & Tenure -->
+          <div class="kpi-card" id="kpi-card-ltv">
+            <div class="kpi-header">
+              <span class="kpi-title">Avg Realized Customer LTV</span>
+              <div class="kpi-icon indigo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value-row">
+              <span class="kpi-value" id="kpi-avg-ltv">$3,894</span>
+              <span class="kpi-pill-badge badge-purple">Tenure: 14.2m</span>
+            </div>
+            <div class="kpi-footer-metric">
+              <span class="muted-text">Enterprise Tier LTV:</span>
+              <span class="highlight-cyan">$14,667 (26x Starter)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Risk ARR Alert Bento Banner -->
+        <div class="alert-banner" id="risk-alert-banner">
+          <div class="alert-pulse-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="alert-content">
+            <div class="alert-title-row">
+              <h4>Acute Revenue Risk Alert: $2,163,768 ARR at Immediate Churn Risk</h4>
+              <span class="alert-tag">High Priority Action</span>
+            </div>
+            <p>Predictive machine learning models identify <strong>1,009 active accounts</strong> exhibiting acute churn probability (&gt;65%), representing <strong>$180,314 in monthly recurring revenue ($2.16M ARR)</strong> requiring proactive customer success intervention.</p>
+          </div>
+          <a href="#accounts-section" class="btn btn-warning" id="btn-view-high-risk">
+            <span>Inspect At-Risk Accounts</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Section: Cohort Retention Matrix Heatmap -->
+      <section id="cohorts-section" class="dashboard-section">
+        <div class="section-card">
+          <div class="section-card-header">
+            <div>
+              <div class="section-pill">Longitudinal Analysis</div>
+              <h2 class="section-title">Customer Cohort Retention Heatmap</h2>
+              <p class="section-desc">Tracks the percentage of customer accounts retained in each signup cohort across Month 0 to Month 12.</p>
+            </div>
+
+            <!-- Heatmap Option Controls -->
+            <div class="cohort-options-bar">
+              <!-- Cohort Period Filter Option -->
+              <div class="filter-group-mini">
+                <label for="cohort-period-select">Cohort Filter:</label>
+                <select id="cohort-period-select" class="custom-select-mini">
+                  <option value="ALL" selected>All 24 Cohorts (2024–2025)</option>
+                  <option value="2024">2024 Signups Only</option>
+                  <option value="2025">2025 Signups Only</option>
+                </select>
+              </div>
+
+              <!-- Metric Display Option -->
+              <div class="filter-group-mini">
+                <label for="cohort-metric-select">Display Metric:</label>
+                <select id="cohort-metric-select" class="custom-select-mini">
+                  <option value="retention" selected>Retention Rate (%)</option>
+                  <option value="churn">Churn Rate (%)</option>
+                  <option value="count">Active Accounts (#)</option>
+                </select>
+              </div>
+
+              <!-- View Switcher Toggle -->
+              <div class="view-toggle">
+                <button class="toggle-btn active" id="toggle-heatmap">Heatmap Table</button>
+                <button class="toggle-btn" id="toggle-survival">Survival Decay Curve</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heatmap Container -->
+          <div id="cohort-heatmap-container" class="table-responsive styled-scrollbar">
+            <table class="cohort-table" id="cohort-table">
+              <thead>
+                <tr>
+                  <th class="sticky-col">Cohort Month</th>
+                  <th>Cohort Size</th>
+                  <th>M0</th>
+                  <th>M1</th>
+                  <th>M2</th>
+                  <th>M3</th>
+                  <th>M4</th>
+                  <th>M5</th>
+                  <th>M6</th>
+                  <th>M7</th>
+                  <th>M8</th>
+                  <th>M9</th>
+                  <th>M10</th>
+                  <th>M11</th>
+                  <th>M12</th>
+                </tr>
+              </thead>
+              <tbody id="cohort-tbody">
+                <!-- Dynamically populated by app.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Alternative Survival Curve View (Hidden by default) -->
+          <div id="survival-chart-container" class="chart-container" style="display: none; height: 380px;">
+            <canvas id="survivalChart"></canvas>
+          </div>
+
+          <!-- Heatmap Legend & Insight -->
+          <div class="heatmap-legend-bar">
+            <div class="legend-scale">
+              <span class="legend-scale-title">Color Scale:</span>
+              <span class="scale-item c-low">&lt; 55% Drop-off</span>
+              <span class="scale-item c-med">55% - 70% Moderate</span>
+              <span class="scale-item c-good">70% - 85% Good</span>
+              <span class="scale-item c-high">&ge; 85% Sticky Retention</span>
+            </div>
+            <div class="cohort-key-takeaway">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span><strong>The Onboarding Cliff:</strong> 58% of all churn takes place in Months 1 to 4. Accounts that reach Month 6 demonstrate over <strong>89.2% probability</strong> of Year 1 survival.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Churn Drivers, Root Causes & ML Model -->
+      <section id="drivers-section" class="dashboard-section">
+        <div class="grid-2-col">
+          <!-- ML Feature Importance Bento Card -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <div>
+                <div class="section-pill">Machine Learning</div>
+                <h3 class="section-title">Predictive Churn Risk Drivers</h3>
+                <p class="section-desc">Random Forest Feature Importance weights (Model ROC-AUC: 0.807)</p>
+              </div>
+            </div>
+            <div class="chart-container" style="height: 310px;">
+              <canvas id="churnDriversChart"></canvas>
+            </div>
+            <div class="driver-insights-list" id="driver-insights-list">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Primary Churn Reasons & Lost ARR Bento Card -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <div>
+                <div class="section-pill">Financial Impact</div>
+                <h3 class="section-title">Primary Churn Root Causes & Lost ARR</h3>
+                <p class="section-desc">Revenue loss attribution categorized by customer exit feedback</p>
+              </div>
+            </div>
+            <div class="chart-container" style="height: 310px;">
+              <canvas id="churnReasonsChart"></canvas>
+            </div>
+            <div class="reasons-summary-table-wrap styled-scrollbar">
+              <table class="mini-table" id="reasons-mini-table">
+                <thead>
+                  <tr>
+                    <th>Root Cause</th>
+                    <th>Accounts</th>
+                    <th>Lost ARR</th>
+                    <th>% Lost Rev</th>
+                  </tr>
+                </thead>
+                <tbody id="reasons-tbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparative Segmentation 3-Card Bento Grid -->
+        <div class="grid-3-col" style="margin-top: 1.5rem;">
+          <!-- Card 1: Plan Tier Retention -->
+          <div class="section-card micro-segment-card">
+            <div class="segment-card-top">
+              <h4 class="card-subheading">Retention by Subscription Plan</h4>
+              <span class="micro-badge">Tier Breakdown</span>
+            </div>
+            <div class="chart-container" style="height: 200px;">
+              <canvas id="planRetentionChart"></canvas>
+            </div>
+            <p class="segment-card-note">Enterprise accounts retain at <strong>84.0%</strong> vs Starter at <strong>43.4%</strong> due to dedicated onboarding and multi-seat stickiness.</p>
+          </div>
+
+          <!-- Card 2: Billing Cycle Impact -->
+          <div class="section-card micro-segment-card">
+            <div class="segment-card-top">
+              <h4 class="card-subheading">Billing Cycle Retention Gap</h4>
+              <span class="micro-badge">Contract Type</span>
+            </div>
+            <div class="chart-container" style="height: 200px;">
+              <canvas id="contractRetentionChart"></canvas>
+            </div>
+            <p class="segment-card-note">Annual contract subscribers achieve <strong>78.9% retention</strong> vs <strong>43.7%</strong> for monthly accounts (a massive 35.2% gap).</p>
+          </div>
+
+          <!-- Card 3: Onboarding Impact -->
+          <div class="section-card micro-segment-card">
+            <div class="segment-card-top">
+              <h4 class="card-subheading">Impact of Onboarding Completion</h4>
+              <span class="micro-badge">Product Adoption</span>
+            </div>
+            <div class="chart-container" style="height: 200px;">
+              <canvas id="onboardingImpactChart"></canvas>
+            </div>
+            <p class="segment-card-note">Customers completing guided onboarding have a <strong>2.1x higher retention rate</strong> (70.1% vs 33.0%).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Interactive Churn ROI & Revenue Simulator -->
+      <section id="simulator-section" class="dashboard-section">
+        <div class="section-card simulator-card">
+          <div class="section-card-header">
+            <div>
+              <div class="section-pill">Executive What-If Model</div>
+              <h2 class="section-title">Strategic Churn Reduction & ROI Simulator</h2>
+              <p class="section-desc">Model the direct ARR revenue impact of implementing targeted retention interventions.</p>
+            </div>
+            <!-- Simulator Presets Option -->
+            <div class="simulator-presets-bar">
+              <span class="preset-label">Quick Presets:</span>
+              <button class="preset-btn" data-onboard="30" data-annual="15" data-dunning="30">🔥 Aggressive Growth</button>
+              <button class="preset-btn" data-onboard="20" data-annual="25" data-dunning="20">🔄 Annual Push</button>
+              <button class="preset-btn" data-onboard="15" data-annual="10" data-dunning="50">💳 Dunning Fix</button>
+              <button class="preset-btn active" data-onboard="15" data-annual="10" data-dunning="25">⭐ Balanced</button>
+              <button class="preset-btn reset" data-onboard="0" data-annual="0" data-dunning="0">↺ Reset</button>
+            </div>
+          </div>
+
+          <div class="simulator-body">
+            <!-- Left Console: Interactive Sliders -->
+            <div class="simulator-controls">
+              <!-- Slider 1: Onboarding Lift -->
+              <div class="control-box">
+                <div class="control-label-row">
+                  <div class="control-info">
+                    <span class="control-num">01</span>
+                    <label for="slider-onboarding">Guided Onboarding Completion Lift</label>
+                  </div>
+                  <span class="control-val" id="val-onboarding">+15%</span>
+                </div>
+                <input type="range" id="slider-onboarding" min="0" max="40" step="5" value="15" class="custom-slider">
+                <span class="control-hint">Reduces Month 1–3 drop-offs via interactive product tours & milestone incentives.</span>
+              </div>
+
+              <!-- Slider 2: Annual Plan Switch -->
+              <div class="control-box">
+                <div class="control-label-row">
+                  <div class="control-info">
+                    <span class="control-num">02</span>
+                    <label for="slider-annual">Monthly to Annual Plan Conversion</label>
+                  </div>
+                  <span class="control-val" id="val-annual">+10%</span>
+                </div>
+                <input type="range" id="slider-annual" min="0" max="30" step="5" value="10" class="custom-slider">
+                <span class="control-hint">Incentivizes monthly users to switch to annual subscriptions with a 15% discount offer.</span>
+              </div>
+
+              <!-- Slider 3: Involuntary Churn Recovery -->
+              <div class="control-box">
+                <div class="control-label-row">
+                  <div class="control-info">
+                    <span class="control-num">03</span>
+                    <label for="slider-dunning">Involuntary Dunning / Payment Recovery</label>
+                  </div>
+                  <span class="control-val" id="val-dunning">+25%</span>
+                </div>
+                <input type="range" id="slider-dunning" min="0" max="60" step="5" value="25" class="custom-slider">
+                <span class="control-hint">Smart retry logic, pre-expiration card notices, and secondary payment options.</span>
+              </div>
+            </div>
+
+            <!-- Right Panel: Projected ROI Card -->
+            <div class="simulator-results-panel">
+              <div class="results-header-row">
+                <h4 class="results-heading">Projected Annual Financial Impact</h4>
+                <span class="sim-badge">Live Calculation</span>
+              </div>
+
+              <div class="sim-metric-card hero-sim-card">
+                <span class="sim-lbl">Annual Recurring Revenue (ARR) Saved</span>
+                <span class="sim-val highlight-green" id="sim-arr-saved">+$538,400</span>
+              </div>
+
+              <div class="sim-metric-grid">
+                <div class="sim-metric-card">
+                  <span class="sim-lbl">MRR Protected</span>
+                  <span class="sim-val" id="sim-mrr-saved">+$44,867 / mo</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-lbl">Accounts Preserved</span>
+                  <span class="sim-val" id="sim-cust-saved">284 Accounts</span>
+                </div>
+              </div>
+
+              <div class="sim-metric-card grr-sim-card">
+                <span class="sim-lbl">Gross Revenue Retention (GRR) Lift</span>
+                <span class="sim-val" id="sim-grr-lift">73.5% &rarr; 77.8% (+4.3%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Customer Account Risk Explorer -->
+      <section id="accounts-section" class="dashboard-section">
+        <div class="section-card">
+          <div class="section-card-header">
+            <div>
+              <div class="section-pill">Customer Success Action Center</div>
+              <h2 class="section-title">Customer Account Risk Explorer</h2>
+              <p class="section-desc">Search, filter, and prioritize active and churned accounts by predictive churn risk probability.</p>
+            </div>
+
+            <!-- Account Filter Toolbar Options -->
+            <div class="account-filters">
+              <div class="search-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="account-search-input" placeholder="Search Customer ID, Plan..." class="search-input">
+              </div>
+
+              <select id="risk-tier-filter" class="custom-select">
+                <option value="ALL">All Risk Levels</option>
+                <option value="High Risk" selected>High Risk (&gt;65%)</option>
+                <option value="Medium Risk">Medium Risk (35–65%)</option>
+                <option value="Low Risk">Low Risk (&lt;35%)</option>
+              </select>
+
+              <select id="account-status-filter" class="custom-select">
+                <option value="ALL">All Statuses</option>
+                <option value="Active" selected>Active Accounts Only</option>
+                <option value="Churned">Churned Accounts</option>
+              </select>
+
+              <!-- Rows per page Option -->
+              <select id="rows-per-page-select" class="custom-select">
+                <option value="15" selected>15 rows/page</option>
+                <option value="30">30 rows/page</option>
+                <option value="50">50 rows/page</option>
+                <option value="100">100 rows/page</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive styled-scrollbar" style="max-height: 520px;">
+            <table class="accounts-table" id="accounts-table">
+              <thead>
+                <tr>
+                  <th data-sort="customer_id" class="sortable-th" title="Click to sort by Customer ID">Customer ID <span class="sort-icon" id="sort-icon-customer_id">↕</span></th>
+                  <th data-sort="customer_segment" class="sortable-th" title="Click to sort by Segment">Segment <span class="sort-icon" id="sort-icon-customer_segment">↕</span></th>
+                  <th data-sort="subscription_plan" class="sortable-th" title="Click to sort by Plan Tier">Plan Tier <span class="sort-icon" id="sort-icon-subscription_plan">↕</span></th>
+                  <th data-sort="billing_cycle" class="sortable-th" title="Click to sort by Billing">Billing <span class="sort-icon" id="sort-icon-billing_cycle">↕</span></th>
+                  <th data-sort="mrr" class="sortable-th" title="Click to sort by MRR">MRR <span class="sort-icon" id="sort-icon-mrr">↕</span></th>
+                  <th data-sort="tenure_months" class="sortable-th" title="Click to sort by Tenure">Tenure <span class="sort-icon" id="sort-icon-tenure_months">↕</span></th>
+                  <th data-sort="usage_frequency_days_per_month" class="sortable-th" title="Click to sort by Active Days">Active Days <span class="sort-icon" id="sort-icon-usage_frequency_days_per_month">↕</span></th>
+                  <th data-sort="support_satisfaction_score" class="sortable-th" title="Click to sort by CSAT">CSAT <span class="sort-icon" id="sort-icon-support_satisfaction_score">↕</span></th>
+                  <th data-sort="churn_risk_probability" class="sortable-th" title="Click to sort by Churn Risk">Churn Risk <span class="sort-icon" id="sort-icon-churn_risk_probability">↕</span></th>
+                  <th data-sort="churn_risk_tier" class="sortable-th" title="Click to sort by Risk Tier">Risk Tier <span class="sort-icon" id="sort-icon-churn_risk_tier">↕</span></th>
+                  <th>Recommended Intervention Play</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="accounts-tbody">
+                <!-- Dynamically populated by app.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Footer & Pagination Options -->
+          <div class="accounts-table-footer">
+            <span id="accounts-count-summary">Showing 0 accounts</span>
+            <div class="pagination-controls">
+              <button id="btn-prev-page" class="page-btn" disabled>&larr; Prev</button>
+              <span id="page-indicator" class="page-indicator">Page 1 of 1</span>
+              <button id="btn-next-page" class="page-btn">Next &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="footer-content">
+          <p class="footer-title">&copy; 2026 RetainPulse Analytics | Data Science & Analytics – Task 2 | Future Interns</p>
+          <p class="footer-tech">Engineered with Vanilla HTML5, Modern CSS Design System, JavaScript, Chart.js & Scikit-Learn Predictive Modeling</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Customer Account Telemetry & Action Modal -->
+  <div id="account-modal" class="modal-backdrop" aria-hidden="true" style="display: none;">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-cust-id">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-id-wrap">
+            <span class="modal-account-id" id="modal-cust-id">CUST-12916</span>
+            <span class="risk-pill high" id="modal-risk-pill">
+              <span class="risk-dot"></span>
+              <span id="modal-risk-text">High Risk</span>
+            </span>
+            <span class="status-chip" id="modal-status-chip">Active</span>
+          </div>
+          <p class="modal-subtitle">Customer Health Telemetry & Machine Learning Risk Diagnostic</p>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 4 Quick Telemetry Stats -->
+        <div class="modal-stats-grid">
+          <div class="modal-stat-box">
+            <span class="modal-stat-lbl">Monthly Recurring Revenue</span>
+            <span class="modal-stat-val highlight-mrr" id="modal-mrr">$73.00/mo</span>
+            <span class="modal-stat-sub" id="modal-plan">Starter Plan (Monthly)</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="modal-stat-lbl">Predicted Churn Probability</span>
+            <span class="modal-stat-val highlight-danger" id="modal-churn-prob">68.0%</span>
+            <span class="modal-stat-sub">Random Forest Risk Engine</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="modal-stat-lbl">Customer Lifetime Value</span>
+            <span class="modal-stat-val" id="modal-ltv">$1,022</span>
+            <span class="modal-stat-sub" id="modal-tenure">14 Months Active</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="modal-stat-lbl">Support Satisfaction</span>
+            <span class="modal-stat-val" id="modal-csat">1.9 / 5.0</span>
+            <span class="modal-stat-sub" id="modal-usage">12 Active Days / Mo</span>
+          </div>
+        </div>
+
+        <!-- Telemetry Signals Breakdown -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">Telemetry & Behavioral Signals</h4>
+          <div class="modal-signals-grid" id="modal-signals">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Recommended Playbook Box -->
+        <div class="modal-play-box">
+          <div class="modal-play-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span class="modal-play-title">Prescribed Customer Success Playbook</span>
+          </div>
+          <p class="modal-play-desc" id="modal-play-desc">Initiate immediate executive outreach and support ticket resolution SLA.</p>
+          <div class="modal-action-bar">
+            <button class="btn btn-primary" id="modal-action-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Trigger Retention Outreach
+            </button>
+            <button class="btn btn-secondary" id="modal-copy-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Account ID
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-notification" class="toast-notification" aria-live="polite"></div>
+
+  <!-- Load Data and Application Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

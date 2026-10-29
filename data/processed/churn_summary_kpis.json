@@ -1,0 +1,292 @@
+{
+  "executive_summary": {
+    "total_customers": 8500,
+    "active_customers": 4903,
+    "churned_customers": 3597,
+    "overall_churn_rate_pct": 42.32,
+    "overall_retention_rate_pct": 57.68,
+    "total_active_mrr": 1749275.8,
+    "total_churned_mrr": 630741.0,
+    "mrr_churn_rate_pct": 26.5,
+    "gross_revenue_retention_pct": 73.5,
+    "net_revenue_retention_pct": 104.2,
+    "total_lifetime_revenue": 33099047.68,
+    "avg_customer_ltv": 3894.01,
+    "avg_active_tenure_months": 14.6,
+    "avg_churned_tenure_months": 4.0,
+    "active_high_risk_accounts": 331,
+    "active_high_risk_mrr": 33249.0,
+    "active_high_risk_arr": 398988.0
+  },
+  "segment_performance": [
+    {
+      "customer_segment": "Enterprise",
+      "Total_Customers": 1250,
+      "Active_Customers": 1042,
+      "Churned_Customers": 208,
+      "Churn_Rate": 16.64,
+      "Total_MRR": 1013768.0,
+      "Lost_MRR": 150335.6,
+      "Avg_Tenure_Months": 12.8,
+      "Avg_NPS": 6.3,
+      "Avg_CSAT": 3.77,
+      "Avg_Active_Days": 16.4,
+      "Retention_Rate": 83.36,
+      "ARR_At_Risk": 1804027.2
+    },
+    {
+      "customer_segment": "Mid-Market",
+      "Total_Customers": 2590,
+      "Active_Customers": 1671,
+      "Churned_Customers": 919,
+      "Churn_Rate": 35.48,
+      "Total_MRR": 888896.0,
+      "Lost_MRR": 249269.8,
+      "Avg_Tenure_Months": 11.0,
+      "Avg_NPS": 6.0,
+      "Avg_CSAT": 3.71,
+      "Avg_Active_Days": 14.9,
+      "Retention_Rate": 64.52,
+      "ARR_At_Risk": 2991237.6
+    },
+    {
+      "customer_segment": "SMB",
+      "Total_Customers": 4660,
+      "Active_Customers": 2190,
+      "Churned_Customers": 2470,
+      "Churn_Rate": 53.0,
+      "Total_MRR": 477352.8,
+      "Lost_MRR": 231135.6,
+      "Avg_Tenure_Months": 8.9,
+      "Avg_NPS": 5.8,
+      "Avg_CSAT": 3.74,
+      "Avg_Active_Days": 13.2,
+      "Retention_Rate": 47.0,
+      "ARR_At_Risk": 2773627.2
+    }
+  ],
+  "plan_performance": [
+    {
+      "subscription_plan": "Enterprise",
+      "Total": 1523,
+      "Active": 1279,
+      "Churned": 244,
+      "Churn_Rate": 16.02,
+      "Active_MRR": 1209411.0,
+      "Lost_MRR": 234596.0
+    },
+    {
+      "subscription_plan": "Professional",
+      "Total": 3111,
+      "Active": 1948,
+      "Churned": 1163,
+      "Churn_Rate": 37.38,
+      "Active_MRR": 437600.0,
+      "Lost_MRR": 262819.0
+    },
+    {
+      "subscription_plan": "Starter",
+      "Total": 3866,
+      "Active": 1676,
+      "Churned": 2190,
+      "Churn_Rate": 56.65,
+      "Active_MRR": 102264.8,
+      "Lost_MRR": 133326.0
+    }
+  ],
+  "contract_performance": [
+    {
+      "billing_cycle": "Annual",
+      "Total": 3374,
+      "Churn_Rate": 21.07,
+      "Retention_Rate": 78.93,
+      "Avg_LTV": 7401.01
+    },
+    {
+      "billing_cycle": "Monthly",
+      "Total": 5126,
+      "Churn_Rate": 56.3,
+      "Retention_Rate": 43.7,
+      "Avg_LTV": 1585.65
+    }
+  ],
+  "onboarding_impact": [
+    {
+      "onboarding_completed": false,
+      "Total": 2842,
+      "Churn_Rate": 67.0,
+      "Retention_Rate": 33.0,
+      "Avg_Tenure": 6.2
+    },
+    {
+      "onboarding_completed": true,
+      "Total": 5658,
+      "Churn_Rate": 29.92,
+      "Retention_Rate": 70.08,
+      "Avg_Tenure": 12.0
+    }
+  ],
+  "regional_performance": [
+    {
+      "region": "Asia-Pacific",
+      "Total_Customers": 1431,
+      "Churn_Rate": 42.0,
+      "Total_MRR": 393915.0,
+      "Avg_LTV": 3811.52,
+      "Retention_Rate": 58.0
+    },
+    {
+      "region": "Europe",
+      "Total_Customers": 2285,
+      "Churn_Rate": 41.79,
+      "Total_MRR": 654030.2,
+      "Avg_LTV": 4043.55,
+      "Retention_Rate": 58.21
+    },
+    {
+      "region": "Latin America",
+      "Total_Customers": 654,
+      "Churn_Rate": 43.73,
+      "Total_MRR": 181983.6,
+      "Avg_LTV": 3928.13,
+      "Retention_Rate": 56.27
+    },
+    {
+      "region": "North America",
+      "Total_Customers": 4130,
+      "Churn_Rate": 42.49,
+      "Total_MRR": 1150088.0,
+      "Avg_LTV": 3834.44,
+      "Retention_Rate": 57.51
+    }
+  ],
+  "engagement_performance": [
+    {
+      "engagement_tier": "High Engagement (>18 days/mo)",
+      "Total_Customers": 2490,
+      "Churn_Rate": 25.58,
+      "Avg_Tenure_Months": 12.4,
+      "Retention_Rate": 74.42
+    },
+    {
+      "engagement_tier": "Low Engagement (<8 days/mo)",
+      "Total_Customers": 1673,
+      "Churn_Rate": 69.04,
+      "Avg_Tenure_Months": 6.2,
+      "Retention_Rate": 30.96
+    },
+    {
+      "engagement_tier": "Moderate Engagement (8-18 days/mo)",
+      "Total_Customers": 4337,
+      "Churn_Rate": 41.62,
+      "Avg_Tenure_Months": 10.3,
+      "Retention_Rate": 58.38
+    }
+  ],
+  "churn_reasons": [
+    {
+      "churn_reason": "Poor Product Fit / Low Usage",
+      "Churned_Customers": 2028,
+      "Lost_MRR": 314050.0,
+      "Avg_Tenure_Before_Churn": 2.5,
+      "Avg_CSAT": 3.7,
+      "Pct_Of_Churned_Customers": 56.38,
+      "Lost_ARR": 3768600.0
+    },
+    {
+      "churn_reason": "Competitor Switched",
+      "Churned_Customers": 432,
+      "Lost_MRR": 89892.8,
+      "Avg_Tenure_Before_Churn": 6.2,
+      "Avg_CSAT": 4.0,
+      "Pct_Of_Churned_Customers": 12.01,
+      "Lost_ARR": 1078713.6
+    },
+    {
+      "churn_reason": "Customer Support Unresponsive",
+      "Churned_Customers": 429,
+      "Lost_MRR": 80992.6,
+      "Avg_Tenure_Before_Churn": 6.0,
+      "Avg_CSAT": 2.84,
+      "Pct_Of_Churned_Customers": 11.93,
+      "Lost_ARR": 971911.2
+    },
+    {
+      "churn_reason": "Missing Key Integrations",
+      "Churned_Customers": 154,
+      "Lost_MRR": 55180.8,
+      "Avg_Tenure_Before_Churn": 5.8,
+      "Avg_CSAT": 4.02,
+      "Pct_Of_Churned_Customers": 4.28,
+      "Lost_ARR": 662169.6
+    },
+    {
+      "churn_reason": "High Price / Budget Cuts",
+      "Churned_Customers": 320,
+      "Lost_MRR": 47842.8,
+      "Avg_Tenure_Before_Churn": 6.2,
+      "Avg_CSAT": 3.93,
+      "Pct_Of_Churned_Customers": 8.9,
+      "Lost_ARR": 574113.6
+    },
+    {
+      "churn_reason": "Payment / Involuntary Dunning Failure",
+      "Churned_Customers": 234,
+      "Lost_MRR": 42782.0,
+      "Avg_Tenure_Before_Churn": 4.7,
+      "Avg_CSAT": 3.67,
+      "Pct_Of_Churned_Customers": 6.51,
+      "Lost_ARR": 513384.0
+    }
+  ],
+  "top_drivers": [
+    {
+      "feature_code": "is_monthly_billing",
+      "feature_name": "Monthly Contract (vs Annual)",
+      "importance_weight": 0.208102975833249,
+      "relative_impact_pct": 20.81,
+      "odds_ratio": 2.017188866815456,
+      "risk_direction": "Increases Churn Risk"
+    },
+    {
+      "feature_code": "is_onboarding_completed",
+      "feature_name": "Onboarding Completed",
+      "importance_weight": 0.20730184115012562,
+      "relative_impact_pct": 20.73,
+      "odds_ratio": 0.5943806994498723,
+      "risk_direction": "Decreases Churn Risk (Protective)"
+    },
+    {
+      "feature_code": "usage_frequency_days_per_month",
+      "feature_name": "Monthly Active Days",
+      "importance_weight": 0.16938546794602227,
+      "relative_impact_pct": 16.94,
+      "odds_ratio": 0.694840126057013,
+      "risk_direction": "Decreases Churn Risk (Protective)"
+    },
+    {
+      "feature_code": "mrr",
+      "feature_name": "Monthly Recurring Revenue (MRR)",
+      "importance_weight": 0.08991915824054067,
+      "relative_impact_pct": 8.99,
+      "odds_ratio": 0.9167214928348482,
+      "risk_direction": "Decreases Churn Risk (Protective)"
+    },
+    {
+      "feature_code": "support_satisfaction_score",
+      "feature_name": "CSAT Score",
+      "importance_weight": 0.06665386326856268,
+      "relative_impact_pct": 6.67,
+      "odds_ratio": 0.9070689273219301,
+      "risk_direction": "Decreases Churn Risk (Protective)"
+    },
+    {
+      "feature_code": "active_users_seats",
+      "feature_name": "Active Licensed Seats",
+      "importance_weight": 0.055513863338444894,
+      "relative_impact_pct": 5.55,
+      "odds_ratio": 1.0517504259378831,
+      "risk_direction": "Increases Churn Risk"
+    }
+  ]
+}

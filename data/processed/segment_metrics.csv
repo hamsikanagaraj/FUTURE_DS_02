@@ -1,0 +1,4 @@
+customer_segment,Total_Customers,Active_Customers,Churned_Customers,Churn_Rate,Total_MRR,Lost_MRR,Avg_Tenure_Months,Avg_NPS,Avg_CSAT,Avg_Active_Days,Retention_Rate,ARR_At_Risk
+Enterprise,1250,1042,208,16.64,1013768.0,150335.6,12.8,6.3,3.77,16.4,83.36,1804027.2
+Mid-Market,2590,1671,919,35.48,888896.0,249269.8,11.0,6.0,3.71,14.9,64.52,2991237.6
+SMB,4660,2190,2470,53.0,477352.8,231135.6,8.9,5.8,3.74,13.2,47.0,2773627.2

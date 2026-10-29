@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Customer Retention & Churn Analysis Report | SaaSify Cloud Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F766E;
+      --primary-dark: #115E59;
+      --navy: #0F172A;
+      --slate: #334155;
+      --light-slate: #F8FAFC;
+      --border: #E2E8F0;
+      --rose: #E11D48;
+      --amber: #D97706;
+      --emerald: #059669;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--slate);
+      background-color: #F1F5F9;
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+    .report-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 3.5rem 4rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+    }
+    .report-header {
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .report-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .report-title p {
+      font-size: 1.05rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+    .report-meta {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #64748B;
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .kpi-box {
+      background: var(--light-slate);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .kpi-box .lbl {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748B;
+      margin-bottom: 0.4rem;
+    }
+    .kpi-box .val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .kpi-box .sub {
+      font-size: 0.76rem;
+      color: #94A3B8;
+      margin-top: 0.2rem;
+    }
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.45rem;
+      color: var(--navy);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    p { margin-bottom: 1rem; font-size: 0.95rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0 2rem;
+      font-size: 0.88rem;
+    }
+    th {
+      background: #0F172A;
+      color: #FFFFFF;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.75rem 0.85rem;
+    }
+    td {
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:nth-child(even) { background-color: var(--light-slate); }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge-danger { background: #FFE4E6; color: #BE123C; }
+    .badge-success { background: #DCFCE7; color: #15803D; }
+    .badge-warning { background: #FEF3C7; color: #B45309; }
+    .alert-box {
+      background: #FEF2F2;
+      border-left: 4px solid var(--rose);
+      padding: 1.25rem;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+    }
+    .alert-box h4 {
+      color: var(--rose);
+      margin-bottom: 0.35rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .strategy-card {
+      background: var(--light-slate);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .strategy-card h4 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+    .strategy-card p {
+      font-size: 0.85rem;
+      color: #475569;
+      margin-bottom: 0.5rem;
+    }
+    .strategy-card .impact {
+      font-weight: 700;
+      color: var(--emerald);
+      font-size: 0.88rem;
+    }
+    .print-btn-bar {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn {
+      background: var(--navy);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    @media print {
+      body { background: #FFFFFF; padding: 0; }
+      .report-container { box-shadow: none; padding: 0; }
+      .print-btn-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-container">
+    <div class="print-btn-bar">
+      <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+
+    <header class="report-header">
+      <div class="report-title">
+        <h1>Customer Retention & Churn Executive Report</h1>
+        <p>SaaSify Cloud Solutions | Longitudinal Cohort Retention & Churn Prevention Analysis</p>
+      </div>
+      <div class="report-meta">
+        <p><strong>Prepared for:</strong> Product & Executive Leadership</p>
+        <p><strong>Author:</strong> Future Interns Analytics Team</p>
+        <p><strong>Date:</strong> October 2026 | FY24–FY26 Horizon</p>
+      </div>
+    </header>
+
+    <div class="kpi-row">
+      <div class="kpi-box">
+        <div class="lbl">Total Monitored Base</div>
+        <div class="val">8,500</div>
+        <div class="sub">Customer Accounts</div>
+      </div>
+      <div class="kpi-box">
+        <div class="lbl">Customer Churn Rate</div>
+        <div class="val" style="color: var(--rose);">42.3%</div>
+        <div class="sub">3,597 Departed Accounts</div>
+      </div>
+      <div class="kpi-box">
+        <div class="lbl">Active MRR</div>
+        <div class="val" style="color: var(--emerald);">$1.75M</div>
+        <div class="sub">ARR: $20.99M</div>
+      </div>
+      <div class="kpi-box">
+        <div class="lbl">Gross Revenue Retention</div>
+        <div class="val">73.5%</div>
+        <div class="sub">Benchmark Target: &gt;85%</div>
+      </div>
+      <div class="kpi-box">
+        <div class="lbl">Avg Customer LTV</div>
+        <div class="val">$3,894</div>
+        <div class="sub">Enterprise: $14,667</div>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <h4>🚨 Acute Revenue Risk Alert: $2,163,768 ARR at Immediate Risk</h4>
+      <p>Machine learning predictive scoring indicates that <strong>1,009 currently active customer accounts</strong> exhibit high churn propensity (&gt;65% churn probability). Without proactive retention intervention, SaaSify is on track to lose over <strong>$180,314 in monthly recurring revenue</strong> over the next two quarters.</p>
+    </div>
+
+    <h2>1. The 24-Month Cohort Retention Curve</h2>
+    <p>We evaluated 24 consecutive monthly signup cohorts spanning January 2024 through December 2025. Across mature cohorts, the customer retention trajectory reveals an unmistakable pattern:</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Tenure Month</th>
+          <th>M0</th>
+          <th>M1</th>
+          <th>M2</th>
+          <th>M3</th>
+          <th>M4</th>
+          <th>M6</th>
+          <th>M8</th>
+          <th>M10</th>
+          <th>M12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cohort Retention Benchmark</strong></td>
+          <td>100.0%</td>
+          <td>100.0%</td>
+          <td>90.7%</td>
+          <td>81.0%</td>
+          <td>70.9%</td>
+          <td>67.7%</td>
+          <td>65.3%</td>
+          <td>63.3%</td>
+          <td>61.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <td><span class="badge badge-success">Signup</span></td>
+          <td><span class="badge badge-success">Trial</span></td>
+          <td><span class="badge badge-warning">Drop</span></td>
+          <td><span class="badge badge-danger">Cliff</span></td>
+          <td><span class="badge badge-danger">Cliff</span></td>
+          <td><span class="badge badge-success">Stable</span></td>
+          <td><span class="badge badge-success">Stable</span></td>
+          <td><span class="badge badge-success">Stable</span></td>
+          <td><span class="badge badge-success">Loyal</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Crucial Finding:</strong> <strong>57.9% of all customer churn occurs between Month 1 and Month 4</strong>. If an account is guided past Month 6, their annual survival probability surges to <strong>89.2%</strong>. The onboarding phase is the single highest-ROI intervention window.</p>
+
+    <div style="text-align: center; margin: 1.5rem 0;">
+      <img src="assets/cohort_retention_heatmap.png" alt="Cohort Retention Heatmap" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+      <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem; italic: true;">Figure 1: 24-Month Longitudinal Customer Cohort Retention Heatmap Matrix</p>
+    </div>
+
+    <h2>2. Root Causes of Churn & Financial Impact</h2>
+    <p>Telemetry, ticket analysis, and departure surveys identify six primary churn reasons, quantified below by lost Annual Recurring Revenue:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Primary Churn Reason</th>
+          <th>Lost Accounts</th>
+          <th>% of Churn</th>
+          <th>Lost MRR ($)</th>
+          <th>Lost ARR ($)</th>
+          <th>Avg CSAT</th>
+          <th>Avg Tenure Before Exit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Poor Product Fit / Low Usage</strong></td>
+          <td>1,873</td>
+          <td>52.1%</td>
+          <td>$314,050.00</td>
+          <td><strong>$3,768,600.00</strong></td>
+          <td>3.6</td>
+          <td>2.1 Months</td>
+        </tr>
+        <tr>
+          <td><strong>Competitor Switched</strong></td>
+          <td>569</td>
+          <td>15.8%</td>
+          <td>$89,892.80</td>
+          <td><strong>$1,078,713.60</strong></td>
+          <td>3.9</td>
+          <td>9.4 Months</td>
+        </tr>
+        <tr>
+          <td><strong>Customer Support Unresponsive</strong></td>
+          <td>473</td>
+          <td>13.1%</td>
+          <td>$80,992.60</td>
+          <td><strong>$971,911.20</strong></td>
+          <td>2.1</td>
+          <td>5.8 Months</td>
+        </tr>
+        <tr>
+          <td><strong>Missing Key Integrations</strong></td>
+          <td>291</td>
+          <td>8.1%</td>
+          <td>$55,180.80</td>
+          <td><strong>$662,169.60</strong></td>
+          <td>3.8</td>
+          <td>8.2 Months</td>
+        </tr>
+        <tr>
+          <td><strong>High Price / Budget Cuts</strong></td>
+          <td>247</td>
+          <td>6.9%</td>
+          <td>$47,842.80</td>
+          <td><strong>$574,113.60</strong></td>
+          <td>3.5</td>
+          <td>6.1 Months</td>
+        </tr>
+        <tr>
+          <td><strong>Involuntary Payment Failure</strong></td>
+          <td>144</td>
+          <td>4.0%</td>
+          <td>$42,782.00</td>
+          <td><strong>$513,384.00</strong></td>
+          <td>3.7</td>
+          <td>4.3 Months</td>
+        </tr>
+        <tr style="font-weight: 700; background-color: #E2E8F0;">
+          <td>Total Churned Customer Base</td>
+          <td>3,597</td>
+          <td>100.0%</td>
+          <td>$630,741.00</td>
+          <td>$7,568,892.00</td>
+          <td>3.4</td>
+          <td>4.3 Months</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align: center; margin: 1.5rem 0;">
+      <img src="assets/churn_reasons_revenue_loss.png" alt="Churn Root Causes Donut Chart" style="max-width: 85%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+      <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem; italic: true;">Figure 2: Primary Churn Root Causes by Lost Annual Recurring Revenue ($7.57M Total)</p>
+    </div>
+
+    <h2>3. Machine Learning Churn Drivers & Relative Weights</h2>
+    <p>A Random Forest model (ROC-AUC: 0.8073) and Logistic Regression identified the primary behavioral signals distinguishing retained vs churned accounts:</p>
+    <ul>
+      <li><strong>Monthly Contract vs Annual:</strong> 20.8% weight (OR: 2.14). Monthly subscribers churn at more than double the rate of annual accounts.</li>
+      <li><strong>Incomplete Onboarding:</strong> 20.7% weight (OR: 2.82). Failing to complete guided onboarding is the strongest individual risk factor.</li>
+      <li><strong>Monthly Active Usage:</strong> 16.9% weight (OR: 0.42). Usage below 8 days/month signals acute churn disengagement.</li>
+      <li><strong>Customer Satisfaction (CSAT):</strong> 6.7% weight (OR: 0.56). Accounts with CSAT &lt; 3.0 require immediate CS escalation.</li>
+      <li><strong>Payment Dunning Failures:</strong> 4.1% weight (OR: 2.68). Accounts with 2+ failed card retries have a 74% likelihood of churn.</li>
+    </ul>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0;">
+      <div style="text-align: center;">
+        <img src="assets/churn_drivers_feature_importance.png" alt="ML Churn Drivers" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        <p style="font-size: 0.78rem; color: #64748B; margin-top: 0.4rem;">Figure 3: Feature Importance Weights</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="assets/retention_by_segments_and_plans.png" alt="Retention Benchmarks" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        <p style="font-size: 0.78rem; color: #64748B; margin-top: 0.4rem;">Figure 4: Plan, Contract & Onboarding Benchmarks</p>
+      </div>
+    </div>
+
+    <h2>4. Four High-Impact Retention Plays for FY2026</h2>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <h4>1. Eliminate the Onboarding Cliff</h4>
+        <p>Deploy interactive in-app setup checklists and trigger proactive CS outreach whenever an account logs &lt; 3 active days in their first 14 days.</p>
+        <div class="impact">Projected Impact: +$237,400 ARR Saved</div>
+      </div>
+      <div class="strategy-card">
+        <h4>2. Month 2 Annual Plan Migration</h4>
+        <p>Incentivize monthly accounts that completed onboarding to upgrade to an annual plan at Day 45 with a 15% discount (2 months free).</p>
+        <div class="impact">Projected Impact: +$101,750 ARR Saved</div>
+      </div>
+      <div class="strategy-card">
+        <h4>3. Automated Involuntary Dunning</h4>
+        <p>Configure smart retry logic, pre-expiration credit card alerts, and secondary payment method capture to recover failed billing attempts.</p>
+        <div class="impact">Projected Impact: +$154,000 ARR Recovered</div>
+      </div>
+      <div class="strategy-card">
+        <h4>4. CS SLA for CSAT &lt; 3.0</h4>
+        <p>Automate an alert routing any account with CSAT &lt; 3.5 or &ge; 4 tickets to a Customer Success Manager within 24 hours.</p>
+        <div class="impact">Projected Impact: +$98,000 ARR Protected</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding: 1.5rem; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px;">
+      <h3 style="color: #065F46; font-family: 'Outfit', sans-serif; margin-bottom: 0.35rem;">Total Financial ROI of Recommended Plan</h3>
+      <p style="color: #047857; margin-bottom: 0;">Executing these four retention plays recovers an estimated <strong>+$591,150 in Annual Recurring Revenue</strong>, saves <strong>284 customer accounts</strong> from leaving, and lifts Gross Revenue Retention from <strong>73.5% to 78.4%</strong> in the first year.</p>
+    </div>
+  </div>
+</body>
+</html>

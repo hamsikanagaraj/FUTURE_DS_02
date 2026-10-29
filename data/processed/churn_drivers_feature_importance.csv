@@ -1,0 +1,13 @@
+feature_code,feature_name,importance_weight,relative_impact_pct,odds_ratio,risk_direction
+is_monthly_billing,Monthly Contract (vs Annual),0.208102975833249,20.81,2.017188866815456,Increases Churn Risk
+is_onboarding_completed,Onboarding Completed,0.20730184115012562,20.73,0.5943806994498723,Decreases Churn Risk (Protective)
+usage_frequency_days_per_month,Monthly Active Days,0.16938546794602227,16.94,0.694840126057013,Decreases Churn Risk (Protective)
+mrr,Monthly Recurring Revenue (MRR),0.08991915824054067,8.99,0.9167214928348482,Decreases Churn Risk (Protective)
+support_satisfaction_score,CSAT Score,0.06665386326856268,6.67,0.9070689273219301,Decreases Churn Risk (Protective)
+active_users_seats,Active Licensed Seats,0.055513863338444894,5.55,1.0517504259378831,Increases Churn Risk
+nps_score,NPS Rating,0.04863609815005624,4.86,0.9161457796065594,Decreases Churn Risk (Protective)
+payment_failures_count,Payment / Dunning Failures,0.04108959258944438,4.11,1.3125366897783552,Increases Churn Risk
+support_tickets_opened,Support Ticket Volume,0.04015243232439933,4.02,1.0841783676234797,Increases Churn Risk
+is_starter_plan,Starter Plan Tier,0.03698289291272379,3.7,1.210313775045068,Increases Churn Risk
+is_enterprise_plan,Enterprise Plan Tier,0.02394190675893822,2.39,0.8424469833772463,Decreases Churn Risk (Protective)
+is_smb_segment,SMB Customer Segment,0.012319907487492912,1.23,0.9961837511632916,Decreases Churn Risk (Protective)

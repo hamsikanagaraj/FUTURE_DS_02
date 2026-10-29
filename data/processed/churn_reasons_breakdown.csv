@@ -1,0 +1,7 @@
+churn_reason,Churned_Customers,Lost_MRR,Avg_Tenure_Before_Churn,Avg_CSAT,Pct_Of_Churned_Customers,Lost_ARR
+Poor Product Fit / Low Usage,2028,314050.0,2.5,3.7,56.38,3768600.0
+Competitor Switched,432,89892.8,6.2,4.0,12.01,1078713.6
+Customer Support Unresponsive,429,80992.6,6.0,2.84,11.93,971911.2
+Missing Key Integrations,154,55180.8,5.8,4.02,4.28,662169.6
+High Price / Budget Cuts,320,47842.8,6.2,3.93,8.9,574113.6
+Payment / Involuntary Dunning Failure,234,42782.0,4.7,3.67,6.51,513384.0
